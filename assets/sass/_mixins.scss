@@ -1,0 +1,99 @@
+/*Mixins*/
+@mixin box-shadow($shadow...){
+	-moz-box-shadow: $shadow;
+	-webkit-box-shadow: $shadow;
+	box-shadow: $shadow;
+}
+
+@mixin text-shadow($shadow...){
+	-moz-text-shadow: $shadow;
+	-webkit-text-shadow: $shadow;
+	text-shadow: $shadow;
+}
+
+@mixin transition($transition...){
+	-webkit-transition: $transition;
+	-moz-transition: $transition;
+	-o-transition: $transition;
+	-ms-transition: $transition;
+	transition: $transition;
+}
+
+@mixin transition-delay($transition-delay...){
+	-webkit-transition: $transition-delay;
+	-moz-transition: $transition-delay;
+	-o-transition: $transition-delay;
+	-ms-transition: $transition-delay;
+	transition: $transition-delay;
+}
+
+@mixin transform($transforms) {
+	-webkit-transform: $transforms;
+	-moz-transform: $transforms;
+	-ms-transform: $transforms;
+	transform: $transforms;
+}
+
+@mixin translateY ($y) {
+    @include transform(translateY($y));
+}
+
+@mixin scale($scale) {
+	@include transform(scale($scale));
+}
+
+//Banners for fill-screen with background images Mixins
+@mixin fill-screen-block-fixed ($bgImageName, $height) {
+	$url:"images/#{$bgImageName}.jpg";
+  background: url($url) no-repeat;
+	background-size: cover;
+	background-position: center;
+	position: relative;
+	background-attachment: fixed;
+	height: $height;
+}
+
+@mixin fill-screen-block ($bgImageName, $height) {
+	$url:"images/#{$bgImageName}.jpg";
+  background: url($url) no-repeat;
+	background-size: cover;
+	background-position: center;
+	position: relative;
+	height: $height;
+}
+//Button states: active, hover, focus, visited.. Mixins
+@mixin btn-states ($bgColor, $color){
+	background-color: darken($bgColor, 10%);
+	border-color: darken($bgColor, 15%);
+	color:$color;
+}
+
+/*Media Query Mixins */
+
+// Small devices (landscape phones, 576px and up)
+@mixin bp-sm(){
+	@media only screen and (min-width: 576px){
+		@content;
+	}
+}
+
+// Medium devices (tablets, 768px and up)
+@mixin bp-md(){
+	@media only screen and (min-width: 768px){
+		@content;
+	}
+}
+
+// Large devices (desktops, 992px and up)
+@mixin bp-lg(){
+	@media only screen and (min-width: 992px){
+		@content;
+	}
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@mixin bp-xl(){
+	@medai only screen and (min-width: 1200px){
+		@content;
+	}
+}

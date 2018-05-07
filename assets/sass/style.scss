@@ -1,0 +1,628 @@
+/*!
+Theme Name: PopArt Green Test
+Theme URI: http://underscores.me/
+Author: Anita Tapaji
+Author URI: http://tanita.webege.com/
+Description: This is the test WP site for Pop Art Studio
+Version: 1.0.0
+License: GNU General Public License v2 or later
+License URI: LICENSE
+Text Domain: popart
+Tags: custom-background, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready
+
+This theme, like WordPress, is licensed under the GPL.
+Use it to make something cool, have fun, and share what you've learned with others.
+
+WP For PopArt is based on Underscores https://underscores.me/, (C) 2012-2017 Automattic, Inc.
+Underscores is distributed under the terms of the GNU GPL v2 or later.
+*/
+
+@import 'variables';
+@import 'mixins';
+@import 'gallery';
+
+
+/*---------- Global ----------*/
+body {
+  font-family: $font-family-base;
+  font-size: 0.9rem;
+  color: $textColor;
+  line-height: 1.7;
+
+  @include bp-lg {
+    font-size: $font-size-base;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: $titleColor;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+a {
+  color: $textColor;
+  &:hover {
+    text-decoration: none;
+    color: lighten($textColor, 20%);
+  }
+}
+
+.btn-primary {
+  color: $btnColor;
+  font-weight: 500;
+  background-color: $primaryColor;
+  background-image: none;
+  border-color: transparent;
+  border-radius: 0;
+  padding: .2rem .8rem;
+  text-transform: uppercase;
+
+  @media (min-width: 992px) {
+    margin-left: 2rem;
+  }
+
+  &:hover {
+    color: $primaryColor;
+    background-color: transparent;
+    background-image: none;
+    border-color: $primaryColor;
+  }
+}
+
+.intro {
+  font-size: .9rem;
+}
+
+section {
+  padding: 6rem 0;
+  position: relative;
+
+  &.curabitur,
+  &.lorem,
+  &.gallery,
+  &.map {
+    &:after {
+      content:"";
+      border-left: 1px solid $primaryColor;
+      height: 8rem;
+      position: absolute;
+      left: 50%;
+      bottom: -4rem;
+      margin-left: -3px;
+      display: block;
+      z-index: 10;
+    }
+  }
+}
+
+.horizontal-line {
+  border-top: .05rem solid $lightGray;
+  width: 100%;
+  padding-top: 1rem;
+  margin-top: 5rem;
+}
+
+.title-line {
+  &:after {
+    content: "";
+    height: 0;
+    width: 2rem;
+    font-size: 1rem;
+    display: block;
+    border: .9px solid $secondaryColor;
+    margin: 1rem auto 1rem;
+  }
+}
+
+.box {
+  background-color: $white;
+  display: flex;
+  margin: auto 1rem;
+
+  @include bp-md {
+    margin: auto 5rem;
+  }
+
+  @include box-shadow (0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19));
+
+  .title-line:after {
+    margin: 1rem 0;
+  }
+
+  .box-img {
+    flex: 1 1 30%;
+    min-width: 150px;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .box-body {
+    flex: 1 1 70%;
+    padding: 2rem;
+    p {
+      padding: 1rem 0;
+      font-size: .9rem;
+    }
+  }
+
+  .box-footer {
+    display: flex;
+    align-items: center;
+    img{
+      max-width: 52px;
+      align-self: center;
+      margin: .5rem;
+    }
+    .box-footer-item{
+      padding-right: 3rem;
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: column;
+      white-space: nowrap;
+
+
+      span {
+        text-align: center;
+      }
+
+      span:first-of-type {
+        color: $black;
+        font-weight: 500;
+        font-size: 1.1rem;
+        text-align: center;
+      }
+    }
+  }
+}
+
+/*---------- Override Bootstrap style ----------*/
+.nopadding {
+  @media(min-width:576px) and (max-width: 992px){
+    &.col-md-6,
+    &.col-sm-6 {
+      padding:0!important;
+    }
+  }
+}
+
+.navbar-light .navbar-nav .active>.nav-link,
+.navbar-light .navbar-nav .nav-link.active{
+  color: $secondaryColor;
+}
+.navbar-light .navbar-nav .nav-link {
+  font-weight: bold;
+}
+.navbar-light .navbar-nav .nav-link:focus,
+.navbar-light .navbar-nav .nav-link:hover {
+  &:hover {
+    color: $primaryColor;
+  }
+}
+
+.btn-primary:not(:disabled):not(.disabled):active:focus {
+  box-shadow: none;
+}
+button:focus,
+.navbar-toggler:focus {
+    outline: none;
+    border: 1px solid $primaryColor;
+}
+.btn-primary.focus, .btn-primary:focus {
+    box-shadow: 0 0 0 0.2rem rgba(182,201,47,.5);
+}
+
+.btn-primary:not(:disabled):not(.disabled).active,
+.btn-primary:not(:disabled):not(.disabled):active,
+.show>.btn-primary.dropdown-toggle {
+    color: #fff;
+    background-color: $primaryColor;
+    border-color: $primaryColor;
+}
+
+.btn-primary:not(:disabled):not(.disabled).active:focus,
+.btn-primary:not(:disabled):not(.disabled):active:focus,
+.show>.btn-primary.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.2rem rgba(182,201,47,.5);
+}
+
+
+.card {
+  border: none!important;
+  background-color: transparent;
+  max-width: 370px;
+  margin: 0 auto;
+  padding-bottom: 2rem;
+
+  .post-excerpt-link {
+    padding: 0 0.1rem;
+  }
+
+  .card-numb {
+    font-size: 3rem;
+    margin-top: -2rem;
+  }
+
+  .card-meta {
+    color: $primaryColor;
+    font-style: italic;
+    font-weight: 500;
+    font-size: .9rem;
+    padding-bottom: 1.5rem;
+  }
+  .card-body {
+    padding: .5rem 0;
+  }
+  h3 {
+    font-size: 1.5rem;
+  }
+  p {
+    margin-bottom: 0;
+    font-size: .9rem;
+  }
+  span {
+    color: $primaryColor;
+    font-size: 1.5rem;
+
+    a {
+      display: inline-block;
+      padding-top:.5rem;
+      color: $primaryColor;
+      text-transform: uppercase;
+      font-size: .9rem;
+      font-weight: 500;
+    }
+  }
+}
+
+
+/*---------- Header ----------*/
+
+//Navigation
+
+.navbar {
+
+  .navbar-toggler {
+    padding: .25rem .75rem;
+    font-size: 1.25rem;
+    line-height: 1;
+    background-color: transparent;
+    border: 1px solid $primaryColor;
+    border-radius: 0;
+    &:hover {
+      background-color: lighten($primaryColor, 10%);
+    }
+  }
+
+  .nav-item {
+    text-transform: uppercase;
+    @media (min-width: 992px) {
+      a {
+        font-weight: 500;
+      }
+    }
+  }
+
+  .btn-primary {
+    order: 2;
+    margin-left: 1.5rem;
+  }
+  @media (max-width: 768px) {
+    .btn-primary.focus, .btn-primary:focus {
+        box-shadow: none;
+    }
+
+    .btn-primary:not(:disabled):not(.disabled).active:focus,
+    .btn-primary:not(:disabled):not(.disabled):active:focus,
+    .show>.btn-primary.dropdown-toggle:focus {
+        box-shadow: none;
+    }
+  }
+
+  @include bp-md {
+  .nav-item:not(:nth-child(3)) {
+    a:after {
+      content:"\002F";
+      display: inline;
+      color: $primaryColor;
+      margin-left: .5rem;
+    }
+  }
+}
+
+  @media(max-width: 768px) {
+    justify-content: center;
+    .navbar-brand {
+      display: flex;
+      justify-content: center;
+      flex-basis: 100%;
+    }
+
+    ul {
+      padding-top: 1.2rem;
+      text-align: center;
+    }
+
+    .btn-primary {
+      margin-left:0;
+      padding: 0.45rem 3rem;
+    }
+  }
+}
+
+//Section Slider
+section#top-slider {
+  padding: 0 2rem;
+
+  .carousel-control-next,
+  .carousel-control-prev {
+    width: 5%;
+    z-index: 1;
+  }
+
+}
+.call-to-action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  a.btn-primary {
+    position: absolute;
+    flex: 0 1 auto;
+    width: 405px;
+    margin: 0 auto;
+    display: inline-block;
+    padding: 1rem 2rem;
+    border: 5px solid $btnColor;
+    font-size: .9rem;
+    p, span {
+      color: $btnColor;
+      text-transform: uppercase;
+    }
+    p.title-line {
+      &:after {
+        border-color: $btnColor;
+        margin: .6rem auto 0;
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      color: $btnColor;
+      background-color: darken($primaryColor, 5%);
+      background-image: none;
+      border-color: $btnColor;
+    }
+  }
+}
+
+
+.slider-caption {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  flex-direction: column;
+  position: absolute;
+  top: 40%;
+  h1, p {
+    color: $white;
+  }
+  @media(max-width: 576px){
+    display: none;
+  }
+}
+
+
+/*---------- Main Content ----------*/
+//Section Lorem
+section.lorem {
+  @include fill-screen-block ('bg-img-lorem', 900px);
+
+  .carousel-control-next,
+  .carousel-control-prev {
+    width: 30%
+  }
+
+  .carousel-control-next-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23b6c92f' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E");
+  }
+
+  .carousel-control-prev-icon{
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23b6c92f' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E");
+  }
+  blockquote {
+    position: relative;
+    margin-top: 3rem;
+    font-size: 1.1rem;
+
+    footer {
+      font-size: 1rem;
+      cite {
+        font-style: normal;
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+//Section Map
+section.map {
+  //@include fill-screen-block ('map_img', 750px);
+  padding: 6rem 0;
+  height: 750px;
+  background-color: $darkWhite;
+  display: flex;
+
+  @include bp-lg {
+    padding: 0rem;
+    background: url(images/map_img.jpg) no-repeat;
+    background-position: 100% 100%;
+    background-size: cover;
+  }
+
+  .box {
+    flex: 0 1 40%;
+
+    @media (max-width: 992px){
+      flex: 1 1 100%;
+      .box-img {
+        min-width: 30px;
+      }
+    }
+  }
+}
+
+//Section What we do
+section.what-we-do {
+  color: $yellow;
+  background-color: $secondaryColor;
+
+  h2, h3, span, a {
+    color: $white;
+  }
+
+  p {
+    &.title-line {
+      &:after {
+        border-color: $white;
+      }
+    }
+  }
+
+  .card {
+    max-width: 270px;
+
+    h3 {
+      font-size: 1.1rem;
+    }
+
+    .post-excerpt-btn {
+      &.post-excerpt-page-btn {
+        color: $white;
+      }
+    }
+  }
+}
+
+//Section Blog
+section.news {
+  .card {
+    h3 {
+      text-transform: none;
+      font-size: 1.1rem;
+      margin-bottom: .2rem;
+    }
+    .post-excerpt-btn {
+      &.post-excerpt-page-btn {
+        display: none;
+      }
+    }
+  }
+}
+
+//Section Suscribe
+section.subscribe {
+  padding: 3rem;
+  background-color: $darkWhite;
+  color: $titleColor;
+  font-weight: 500;
+  text-align: center;
+
+  p {
+    font-size: 1.1rem;
+  }
+
+  .input-group {
+    width: 50%;
+    margin: 0 auto;
+  }
+  input {
+    border: none;
+  }
+
+  .btn-primary {
+    &:hover {
+      cursor: pointer;
+      color: $btnColor;
+      background-color: darken($primaryColor, 5%);
+      background-image: none;
+      border-color: $btnColor;
+    }
+  }
+  span {
+    width: 100%;
+    .btn-primary {
+      width: 100%;
+    }
+  }
+
+  @include bp-sm {
+    span {
+      .btn-primary {
+        width: auto!important;
+      }
+    }
+
+    .btn-primary {
+      position: absolute;
+      padding: 0.1rem 0.6rem;
+      bottom: 0.15rem;
+      right: 0.3rem;
+    }
+  }
+}
+
+
+/*---------- Footer ----------*/
+.site-footer {
+    padding: 2.5rem 1rem;
+    font-size: 0.9rem;
+    line-height: 2;
+    white-space: nowrap;
+
+    .row.nowrap {
+      @media (max-width: 576px) {
+        display: block;
+        text-align: center;
+        margin: 0;
+        .d-flex {
+          display: block!important;
+        }
+        .col-4 {
+          max-width:100%;
+          padding-top: 1rem;
+        }
+      }
+    }
+
+    h4{
+      color: $primaryColor;
+      text-transform: uppercase;
+      font-size: 1.1rem;
+    }
+    ul {
+      padding-left: 0;
+    }
+    li{
+      list-style-type: none;
+    }
+
+    address {
+      white-space: nowrap;
+      .tel {
+        color: $logoColor;
+        &:hover {
+          color: lighten($logoColor, 5%);
+        }
+      }
+    }
+
+    small {
+      font-size: .75rem;
+    }
+}

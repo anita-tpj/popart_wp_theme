@@ -1,0 +1,1 @@
+jQuery(function(n){(new WOW).init()});
